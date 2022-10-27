@@ -1,0 +1,78 @@
+#display {
+    height: 100px;
+    width: 500px;
+    border: black 2px solid;
+    margin-bottom: 20px;
+}
+
+#buttons {
+    height:500px;
+    width: 500px;
+    border: black 2px solid;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns:
+        "numbers"
+        "operators";
+}
+
+.button {
+    height: 20px;
+    width: 100px;
+}
+
+#numbers {
+    height: 400px;
+    width: 310px;
+    border: black 2px solid;
+    grid-area: "numbers";
+    grid-template-rows:
+        "row-one"
+        "row-two"
+        "row-three"
+        "row-four";
+}
+
+#operators {
+    border: black 2px solid;
+    grid-area: "operators";
+    grid-template-columns: 
+        "add"
+        "subtract"
+        "multiply"
+        "divide";
+}
+
+
+
+#row-one {
+    grid-area: "row-one";
+}
+
+#row-two {
+    grid-area: "row-two";
+}
+
+#row-three {
+    grid-area: "row-three";
+}
+
+#row-four {
+    grid-area: "row-four";
+}
+
+#add {
+    grid-area: "add";
+}
+
+#subtract {
+    grid-area: "subtract";
+}
+
+#multiply {
+    grid-area: "multiply";
+}
+
+#divide {
+    grid-area: "divide";
+}
