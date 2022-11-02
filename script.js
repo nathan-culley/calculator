@@ -17,22 +17,22 @@ function divide(a,b) {
 
 //calls the arithmetic functions
 function operate(operator, a, b) {
-    if (operator == "+") {
+    if (operator == "plus") {
         return add(a,b);
     }
-    if (operator == "-") {
+    if (operator == "minus") {
         return subtract(a,b);
     }
-    if (operator == "*") {
+    if (operator == "times") {
         return multiply(a,b);
     }
-    if (operator == "/") {
+    if (operator == "dividedBy") {
         return divide(a,b);
     }
 }
 
 //sets variables for each button
-const num9 = document.getElementById('9');
+/* const num9 = document.getElementById('9');
 const num8 = document.getElementById('8');
 const num7 = document.getElementById('7');
 const num6 = document.getElementById('6');
@@ -50,43 +50,68 @@ const dividedBy = document.getElementById('divide');
 const backspace = document.getElementById('backspace');
 const period = document.getElementById('period');
 const clear = document.getElementById('clear');
-const equals = document.getElementById('equals');
+const equals = document.getElementById('equals'); */
 
 //sets operand and result variables and current state of calculation
 let firstOperand = "";
 let secondOperand = "";
+let operator = "";
 let result;
-let firstAssignment = true;
-let secondAssignment = false;
+let assignment = "first";
 
 
-//adds event listeners to number buttons
+//adds event listeners to buttons
 if (document.addEventListener) {
     document.addEventListener("click", handleClick, false);
 }
 else if (document.attachEvent) {
     document.attachEvent("onclick", handleClick);
 }
+
 function handleClick(event) {
     event = event || window.event;
     event.target = event.target || event.srcElement;
     var element = event.target;
-    // Climb up the document tree from the target of the event
     while (element) {
         if (element.nodeName === "BUTTON" && /number/.test(element.className)) {
-            // The user clicked on a <button> or clicked on an element inside a <button>
-            // with a class name called "foo"
             assignNumber(element);
+            break;
+        }
+        if (element.nodeName === "BUTTON" && /operator/.test(element.className)) {
+            assignOperator(element);
+            break;
+        }
+        if (element.nodeName === "BUTTON" && /equals/.test(element.className)) {
+            performOperation(element);
             break;
         }
         element = element.parentNode;
     }
 }
-function assignNumber(button) {
-    console.log(button.id);
-    if (secondAssignment = false) {
-        let digit = button.id;
-        console.log(digit);
 
+function assignNumber(button) {
+    let digit = button.id;
+    if (assignment == "first") {
+        //console.log(digit);
+        firstOperand = firstOperand + digit;
+        console.log(firstOperand);
     }
+    else if (assignment == "second") {
+        secondOperand = secondOperand + digit;
+        console.log(secondOperand);
+    }
+}
+
+function assignOperator(button) {
+    if (assignment == "first") {
+        operator = button.id;
+        console.log(operator);
+        assignment = "second";
+        console.log(assignment);
+    }
+}
+
+function performOperation(button) {
+    result = operate(operator,firstOperand,secondOperand);
+    console.log(result);
 }
