@@ -58,6 +58,7 @@ let secondOperand = "";
 let operator = "";
 let result;
 let assignment = "first";
+let opComplete = "false";
 
 
 //adds event listeners to buttons
@@ -91,7 +92,7 @@ function handleClick(event) {
 
 function assignNumber(button) {
     let digit = button.id;
-    if (assignment == "first") {
+    if (assignment == "first" && opComplete == "false") {
         //console.log(digit);
         firstOperand = firstOperand + digit;
         console.log(firstOperand);
@@ -103,7 +104,7 @@ function assignNumber(button) {
 }
 
 function assignOperator(button) {
-    if (assignment == "first") {
+    if (assignment == "first" || opComplete == "true") {
         operator = button.id;
         console.log(operator);
         assignment = "second";
@@ -112,6 +113,16 @@ function assignOperator(button) {
 }
 
 function performOperation(button) {
+    //convert operands from strings to numbers
+    firstOperand = +firstOperand;
+    secondOperand = +secondOperand;
+    //perform operation and display result
     result = operate(operator,firstOperand,secondOperand);
     console.log(result);
+    //reset for next calculation
+    firstOperand = result;
+    opComplete = "true";
+    assignment = "second";
+    firstOperand = firstOperand.toString();
+    secondOperand = "";
 }
