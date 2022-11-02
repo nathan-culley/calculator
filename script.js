@@ -20,15 +20,7 @@ function multiply(a,b) {
 };
 
 function divide(a,b) {
-    if (b == 0) {
-        firstOperand = "";
-        secondOperand = "";
-        operator = "";
-        assignment = "first";
-        opComplete = "false";
-        return "Think you're clever, huh?";
-    }
-    return (a / b);
+        return (a / b);
 };
 
 //calls the arithmetic functions
@@ -73,6 +65,10 @@ function handleClick(event) {
             performOperation(element);
             break;
         }
+        if (element.nodeName === "BUTTON" && /clear/.test(element.className)) {
+            clearAll(element);
+            break;
+        }
         element = element.parentNode;
     }
 }
@@ -110,7 +106,7 @@ function performOperation(button) {
     firstOperand = +firstOperand;
     secondOperand = +secondOperand;
     //perform operation and display result
-    result = operate(operator,firstOperand,secondOperand).toFixed(5);
+    result = operate(operator,firstOperand,secondOperand);
     console.log(result);
     document.getElementById("display").innerHTML = result;
     //reset for next calculation
@@ -120,4 +116,15 @@ function performOperation(button) {
     firstOperand = firstOperand.toString();
     secondOperand = "";
     operator = "";
+}
+
+function clearAll(button) {
+    console.log("clear");
+    firstOperand = "";
+    secondOperand = "";
+    operator = "";
+    result;
+    assignment = "first";
+    opComplete = "false";
+    document.getElementById("display").innerHTML = "";
 }
