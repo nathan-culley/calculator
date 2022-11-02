@@ -1,3 +1,11 @@
+//sets global variables
+let firstOperand = "";
+let secondOperand = "";
+let operator = "";
+let result;
+let assignment = "first";
+let opComplete = "false";
+
 //functions for basic arithmetic operations
 function add(a,b) {
     return (a + b);
@@ -12,53 +20,32 @@ function multiply(a,b) {
 };
 
 function divide(a,b) {
+    if (b == 0) {
+        firstOperand = "";
+        secondOperand = "";
+        operator = "";
+        assignment = "first";
+        opComplete = "false";
+        return "Think you're clever, huh?";
+    }
     return (a / b);
 };
 
 //calls the arithmetic functions
 function operate(operator, a, b) {
-    if (operator == "plus") {
+    if (operator == "+") {
         return add(a,b);
     }
-    if (operator == "minus") {
+    if (operator == "-") {
         return subtract(a,b);
     }
-    if (operator == "times") {
+    if (operator == "*") {
         return multiply(a,b);
     }
-    if (operator == "dividedBy") {
+    if (operator == "/") {
         return divide(a,b);
     }
 }
-
-//sets variables for each button
-/* const num9 = document.getElementById('9');
-const num8 = document.getElementById('8');
-const num7 = document.getElementById('7');
-const num6 = document.getElementById('6');
-const num5 = document.getElementById('5');
-const num4 = document.getElementById('4');
-const num3 = document.getElementById('3');
-const num2 = document.getElementById('2');
-const num1 = document.getElementById('1');
-const num0 = document.getElementById('0');
-
-const plus = document.getElementById('add');
-const minus = document.getElementById('subtract');
-const times = document.getElementById('multiply');
-const dividedBy = document.getElementById('divide');
-const backspace = document.getElementById('backspace');
-const period = document.getElementById('period');
-const clear = document.getElementById('clear');
-const equals = document.getElementById('equals'); */
-
-//sets operand and result variables and current state of calculation
-let firstOperand = "";
-let secondOperand = "";
-let operator = "";
-let result;
-let assignment = "first";
-let opComplete = "false";
 
 
 //adds event listeners to buttons
@@ -92,14 +79,19 @@ function handleClick(event) {
 
 function assignNumber(button) {
     let digit = button.id;
-    if (assignment == "first" && opComplete == "false") {
+    if (opComplete == "true" && operator == "") {
+        console.log("select an operator");
+    }
+    else if (assignment == "first" && opComplete == "false") {
         //console.log(digit);
         firstOperand = firstOperand + digit;
         console.log(firstOperand);
+        document.getElementById("display").innerHTML = firstOperand;
     }
     else if (assignment == "second") {
         secondOperand = secondOperand + digit;
         console.log(secondOperand);
+        document.getElementById("display").innerHTML = firstOperand + operator + secondOperand;
     }
 }
 
@@ -109,6 +101,7 @@ function assignOperator(button) {
         console.log(operator);
         assignment = "second";
         console.log(assignment);
+        document.getElementById("display").innerHTML = firstOperand + operator;
     }
 }
 
@@ -117,12 +110,14 @@ function performOperation(button) {
     firstOperand = +firstOperand;
     secondOperand = +secondOperand;
     //perform operation and display result
-    result = operate(operator,firstOperand,secondOperand);
+    result = operate(operator,firstOperand,secondOperand).toFixed(5);
     console.log(result);
+    document.getElementById("display").innerHTML = result;
     //reset for next calculation
     firstOperand = result;
     opComplete = "true";
     assignment = "second";
     firstOperand = firstOperand.toString();
     secondOperand = "";
+    operator = "";
 }
