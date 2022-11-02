@@ -1,3 +1,67 @@
+#boundary {
+    width: 95vw;
+    height: 95vh;
+    border: black 2px solid;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+#display {
+    box-sizing: border-box;
+    width: 100% - 20px;
+    height: 200px;
+    margin: 20px;
+    border: black 2px solid;
+
+}
+
+#buttons {
+    box-sizing: border-box;
+    position: relative;
+    width: auto;
+    height: auto;
+    max-height: 750px;
+    margin: 20px;
+    border: black 2px solid;
+    display: grid;
+    grid-template-areas:
+        "row-one"
+        "row-two"
+        "row-three"
+        "row-four";
+}
+
+#row-one {
+    grid-area: "row-one";
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#row-two {
+    grid-area: "row-two";
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#row-three {
+    grid-area: "row-three";
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#row-four {
+    grid-area: "row-four";
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.button {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+    border: black 2px solid;
+    border-radius: 5px
+}
+
+
+/*
 #display {
     height: 100px;
     width: 500px;
@@ -7,7 +71,7 @@
 
 #buttons {
     height:500px;
-    width: 500px;
+    width: auto;
     border: black 2px solid;
     margin-top: 20px;
     display: grid;
@@ -18,7 +82,7 @@
 
 .button {
     height: 20px;
-    width: 100px;
+    width: 50px;
 }
 
 #numbers {
@@ -45,19 +109,19 @@
 
 
 
-#row-one {
+.row-one {
     grid-area: "row-one";
 }
 
-#row-two {
+.row-two {
     grid-area: "row-two";
 }
 
-#row-three {
+.row-three {
     grid-area: "row-three";
 }
 
-#row-four {
+.row-four {
     grid-area: "row-four";
 }
 
@@ -75,4 +139,4 @@
 
 #divide {
     grid-area: "divide";
-}
+} */
