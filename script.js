@@ -35,6 +35,11 @@ function operate(operator, a, b) {
         return multiply(a,b);
     }
     if (operator == "/") {
+        if (b == 0) {
+            clearAll();
+            document.getElementById("display").innerHTML = "Think you're clever?";
+            return;
+        }
         return divide(a,b);
     }
 }
@@ -65,7 +70,7 @@ function handleClick(event) {
             performOperation(element);
             break;
         }
-        if (element.nodeName === "BUTTON" && /clear/.test(element.className)) {
+        if (element.nodeName === "BUTTON" && /clear/.test(element.idName)) {
             clearAll(element);
             break;
         }
@@ -80,14 +85,24 @@ function assignNumber(button) {
     }
     else if (assignment == "first" && opComplete == "false") {
         //console.log(digit);
-        firstOperand = firstOperand + digit;
-        console.log(firstOperand);
-        document.getElementById("display").innerHTML = firstOperand;
+        if (digit == '.' && firstOperand.includes('.') == true) {
+            console.log('Invalid decimal usage');
+        }
+        else {
+            firstOperand = firstOperand + digit;
+            console.log(firstOperand);
+            document.getElementById("display").innerHTML = firstOperand;
+        }
     }
     else if (assignment == "second") {
-        secondOperand = secondOperand + digit;
-        console.log(secondOperand);
-        document.getElementById("display").innerHTML = firstOperand + operator + secondOperand;
+        if (digit == '.' && secondOperand.includes('.') == true) {
+            console.log('Invalid decimal usage');
+        }
+        else {
+            secondOperand = secondOperand + digit;
+            console.log(secondOperand);
+            document.getElementById("display").innerHTML = firstOperand + operator + secondOperand;
+        }
     }
 }
 
@@ -106,7 +121,7 @@ function performOperation(button) {
     firstOperand = +firstOperand;
     secondOperand = +secondOperand;
     //perform operation and display result
-    result = operate(operator,firstOperand,secondOperand);
+    result = operate(operator,firstOperand,secondOperand).toFixed(2);
     console.log(result);
     document.getElementById("display").innerHTML = result;
     //reset for next calculation
