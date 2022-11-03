@@ -1,0 +1,1 @@
+This is my version of the calculator project from The Odin Project. It allows the user to perform all the basic arithmetic functions. Project description can be found at https://www.theodinproject.com/lessons/foundations-calculator.
