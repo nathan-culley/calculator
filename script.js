@@ -70,8 +70,12 @@ function handleClick(event) {
             performOperation(element);
             break;
         }
-        if (element.nodeName === "BUTTON" && /clear/.test(element.idName)) {
+        if (element.nodeName === "BUTTON" && /clear/.test(element.className)) {
             clearAll(element);
+            break;
+        }
+        if (element.nodeName === "BUTTON" && /backspace/.test(element.className)) {
+            backspace(element);
             break;
         }
         element = element.parentNode;
@@ -142,4 +146,30 @@ function clearAll(button) {
     assignment = "first";
     opComplete = "false";
     document.getElementById("display").innerHTML = "";
+}
+
+function backspace(button) {
+    if (assignment == "first" && opComplete == "false") {
+            if (firstOperand == "") {
+                console.log(firstOperand);
+                document.getElementById("display").innerHTML = firstOperand;
+            }
+            else {
+                firstOperand = firstOperand.slice(0, -1);
+                console.log(firstOperand);
+                document.getElementById("display").innerHTML = firstOperand;
+            }
+    }
+    else if (assignment == "second") {
+        if (secondOperand == "") {
+            console.log(secondOperand);
+            document.getElementById("display").innerHTML = secondOperand;
+        }
+        else {
+            secondOperand = secondOperand.slice(0, -1);
+            console.log(secondOperand);
+            document.getElementById("display").innerHTML = firstOperand + operator + secondOperand;
+        }
+        
+    }
 }
